@@ -54,7 +54,7 @@ write_json(
     ),
     pc$pc
   ),
-  "postcodes.json"
+  "site/data/postcodes.json"
 )
 
 # soa.geojson: boundaries for map
@@ -62,11 +62,11 @@ soa |>
   st_transform(29902) |>
   st_simplify(preserveTopology = TRUE, dTolerance = 20) |>
   st_transform(4326) |>
-  st_write("soa.geojson", delete_dsn = TRUE,
+  st_write("R/soa.geojson", delete_dsn = TRUE,
            layer_options = c("RFC7946=YES", "COORDINATE_PRECISION=5"))
 
-pcs <- read_json("postcodes.json")
-dep <- read_json("deprivation.json")
+pcs <- read_json("site/data/postcodes.json")
+dep <- read_json("site/data/deprivation.json")
 
 
 ##
