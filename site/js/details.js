@@ -68,10 +68,9 @@ async function showDetails() {
         .join('');
 
     result.innerHTML = `
-        <h2>${esc(cleanName(area.label))}</h2>
+        <h2>${esc(cleanName(esc(pc)))}</h2>
         <table class="table lookup-table">
             <tbody>
-                <tr><th scope="row">Postcode</th><td>${esc(pc)}</td></tr>
                 <tr><th scope="row">Neighbourhood</th><td>${esc(cleanName(area.label))} (${esc(soa)})</td></tr>
                 <tr><th scope="row">Council area</th><td>${esc(councils[lgd] || lgd)} (${esc(lgd)})</td></tr>
                 <tr><th scope="row">Urban or rural</th><td>${esc(sentenceCase(settlement))}</td></tr>
