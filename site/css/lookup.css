@@ -1,0 +1,39 @@
+.lookup-search {
+    width: 100%;
+    max-width: 480px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.lookup-search .form-control:focus,
+.lookup-search .form-control:invalid:focus,
+.lookup-search .form-control.is-invalid:focus {
+    color: #212529;
+    background-color: #ffffff;
+    border-color: #e905dd;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(8 48 107 / 25%);
+}
+
+.lookup-table {
+    max-width: 640px;
+}
+
+.lookup-table th {
+    width: 12rem;
+}
+
+.scale-row svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.site-nav a {
+    margin-right: 1rem;
+    color: inherit;
+}
+
+.site-nav a[aria-current] {
+    font-weight: 700;
+}

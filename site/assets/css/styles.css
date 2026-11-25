@@ -1,12 +1,22 @@
+/* COPIED CSS FROM POSTCODE_TOOL - NEEDS CLEANED*/
 /* ===========================
    Base
    =========================== */
 body {
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 18px;
-  line-height: 1.5;           /* better readability than 1.0 */
+  line-height: 1.5;          
   font-weight: 400;
   background-color: #f2f5f8;
+  background-size: cover;
+}
+
+#background-map {
+  background-image: url("../img/nimdm_sdz_map.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding: 350px 0 350px 0;
+  margin: 5px
 }
 
 /* ===========================
@@ -34,13 +44,11 @@ h4 { font-size: 18px; line-height: 1.333; font-weight: 400; }
 @media (min-width: 992px) { h4 { font-size: 21px; line-height: 1.286; } }
 
 
-/* External link indicator (scope to main so footer links aren’t doubled) */
 main a[target="_blank"]::after {
   content: "";
   width: 14px; height: 11px;
   margin: 5px; vertical-align: text-bottom; display: inline-block;
 
-  /* Use the SVG as a mask; then color it with Bootstrap’s variable */
   -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="11" viewBox="0 0 14 11"><g fill="none" stroke="%23000" stroke-width="1"><path d="M0 3h2V0h12v8h-2v3H0zm13-2H3v6h10zM2 4H1v4h1zm-1 6h10V8H1z"/></g></svg>') no-repeat center / contain;
           mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="11" viewBox="0 0 14 11"><g fill="none" stroke="%23000" stroke-width="1"><path d="M0 3h2V0h12v8h-2v3H0zm13-2H3v6h10zM2 4H1v4h1zm-1 6h10V8H1z"/></g></svg>') no-repeat center / contain;
   background-color: var(--bs-secondary-color, #6c757d); /* follows Bootstrap’s text-secondary */
@@ -56,7 +64,6 @@ main a[target="_blank"]::after {
   z-index: 0;
   margin-bottom: 2px;
 }
-/* @media (min-width: 768px) { .map { height: 410px; } } */
 
 .map-legend {
   padding-bottom: 10px;
@@ -87,16 +94,15 @@ main a[target="_blank"]::after {
 .colour-block:last-child { border-right: 1px #555555 solid; }
 
 /* Map container min height for small vs large screens */
-/* The element you pass as `container: 'map-container'` */
 #map-container{
   width: 80%;
-  height: 600px;                 /* desktop default */
+  height: 600px;                
   margin: 0 auto;
 }
 
 @media (max-width: 1199.98px){
   #map-container{
-    height: 360px;               /* mobile/tablet shorter */
+    height: 360px;               
   }
 }
 
@@ -112,7 +118,6 @@ main a[target="_blank"]::after {
 }
 @media (max-width: 767.98px) { #chart-container { height: 220px; } }
 
-/* Make Chart.js canvas fill container’s fixed height */
 #chart-container canvas {
   width: 100% !important;
   height: 100% !important;
@@ -175,10 +180,9 @@ nav a{
   width: 14px; height: 11px;
   margin: 5px; vertical-align: text-bottom; display: inline-block;
 
-  /* Use the SVG as a mask; then color it with Bootstrap’s variable */
   -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="11" viewBox="0 0 14 11"><g fill="none" stroke="%23000" stroke-width="1"><path d="M0 3h2V0h12v8h-2v3H0zm13-2H3v6h10zM2 4H1v4h1zm-1 6h10V8H1z"/></g></svg>') no-repeat center / contain;
           mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="11" viewBox="0 0 14 11"><g fill="none" stroke="%23000" stroke-width="1"><path d="M0 3h2V0h12v8h-2v3H0zm13-2H3v6h10zM2 4H1v4h1zm-1 6h10V8H1z"/></g></svg>') no-repeat center / contain;
-  background-color: #fff; /* follows Bootstrap’s text-secondary */
+  background-color: #fff; 
 }
 
 table tr:not(:has(th)):hover {
@@ -260,7 +264,6 @@ table tr:not(:has(th)):hover {
   color: #000;
 }
 
-/* Your custom background */
 .navy-bg {
   background-color: var(--nisra_navy) !important;
   color: #fff !important;
@@ -290,13 +293,11 @@ table tr:not(:has(th)):hover {
   } 
 }
 
-/* Only when expanded (i.e., NOT collapsed) */
 .accordion-button:not(.collapsed) {
   background-color: #00205b;
   color: #fff;
 }
 
-/* optional: keep the little chevron readable */
 .accordion-button:not(.collapsed)::after {
   filter: brightness(0) invert(1);
 }
@@ -321,13 +322,11 @@ table tr:not(:has(th)):hover {
   transition: grid-template-rows .35s ease, opacity .25s ease;
 }
 
-/* prevent content from spilling during animation */
 .info-card-wrap > .card{
   overflow: hidden;
   min-height: 0;
 }
 
-/* open when any accordion section inside is open */
 .info-card-wrap:has(.accordion-collapse.show){
   grid-template-rows: 1fr;   /* open */
   opacity: 1;
@@ -371,45 +370,39 @@ table tr:not(:has(th)):hover {
   margin-top: auto;
 }
 
-/* Clear, consistent focus style for keyboard users */
 :focus-visible {
-  outline: 3px solid #D4351C;      /* high-contrast colour */
+  outline: 3px solid #D4351C;     
   outline-offset: 3px;
 }
 
-/* Optional: soften default focus for mouse users */
 :focus:not(:focus-visible) {
   outline: none;
 }
 
 :root {
-  --bs-focus-ring-color: #D4351C; /* your colour */
+  --bs-focus-ring-color: #D4351C; 
   --bs-focus-ring-width: 0.25rem;
 }
 
-/* Radios & checkboxes (Bootstrap's blue ring is box-shadow) */
 .form-check-input:focus,
 .form-check-input:focus-visible {
   border-color: #D4351C;
   box-shadow: 0 0 0 0.25rem #D4351C;
-  outline: none; /* prevent double-ring if your :focus-visible sets outline */
+  outline: none; 
 }
 
-/* Accordion button focus ring */
 .accordion-button:focus,
 .accordion-button:focus-visible {
-  box-shadow: 0 0 0 0.25rem #D4351C;
+  box-shadow: 0 0 0 0.25rem #1cd43b;
   outline: none;
 }
 
-/* Map & expand chart buttons focus ring */
 input:focus-visible, select:focus-visible, button:focus-visible, .map:has(canvas:focus-visible) {
   outline: 3px solid #D4351C !important;
-  outline-offset: 3px !important;
+  outline-offset: -2px !important;
   box-shadow: none !important;
 }
 
-/* Optional: if you want NO Bootstrap glow anywhere, and rely on your outline */
 .btn:focus,
 .btn:focus-visible,
 .form-control:focus,
@@ -419,7 +412,6 @@ input:focus-visible, select:focus-visible, button:focus-visible, .map:has(canvas
   box-shadow: none;
 }
 
-/* Nav buttons: draw focus inside the element so it can't be hidden */
 .nav-btn:focus-visible,
 .nav .nav-btn:focus-visible,
 #nav a:focus-visible {
@@ -469,7 +461,7 @@ td {
 .arrow.down {
   color: #e60000;
 }
-/* pill-style percentage background */
+
 .percent-wrapper {
   display: inline-block;
   padding: 4px 10px;
@@ -478,7 +470,7 @@ td {
   text-align: right;
 }
 tbody td {
-  border-bottom: 2px solid #e5e7eb; /* light, clean line */
+  border-bottom: 2px solid #e5e7eb; 
 }
 
 th, td {
@@ -507,4 +499,51 @@ thead th {
 
 #cookie-banner a {
   color: #00aae5;
+}
+
+.rank-scale-wrapper {
+    width: 100%;
+    padding: 0.4rem 0;
+}
+
+.rank-scale {
+    position: relative;
+    width: 100%;
+    height: 1rem;
+    overflow: visible;
+    border: 1px solid #c9c9c9;
+    border-radius: 0.5rem;
+    margin-bottom: 5px;
+}
+
+.rank-scale-marker {
+    position: absolute;
+    top: 50%;
+    width: 0.5rem;
+    height: 1.8rem;
+    background-color: #cc3a2a;
+    border: 2px solid #ffffff;
+    border-radius: 0.2rem;
+    transform: translate(-50%, -50%);
+}
+
+.rank-scale-labels {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.25rem 0;
+    font-size: 0.85rem;
+}
+
+.rank-scale-labels span:first-child {
+    text-align: left;
+}
+
+.rank-scale-labels span:nth-child(2) {
+    text-align: center;
+}
+
+.rank-scale-labels span:last-child {
+    text-align: right;
 }
