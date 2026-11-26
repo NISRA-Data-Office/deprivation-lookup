@@ -529,6 +529,20 @@ thead th {
   margin-bottom: 1.5rem;
 }
 
+.index-box {
+  background-color: #ffffff;
+  border: 1px solid #000;
+  border-top: 6px solid transparent;
+  box-shadow: 0 1px 1px 0 rgb(0 0 0);
+  padding: 10%;
+  text-align: center;
+}
+
+.index-box:hover {
+  border-top: 6px solid;
+  border-top-color: #68a41e;
+}
+
 .rank-scale-labels {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
