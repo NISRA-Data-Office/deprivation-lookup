@@ -25,7 +25,6 @@ const cleanIndicator = (name) => name.replace(/\s*Rank \(where 1 is most deprive
 const sentenceCase = (text) => text.charAt(0) + text.slice(1).toLowerCase(); // 
 
 async function showDetails() {
-    const result = document.getElementById('result');
     const pc = (new URLSearchParams(location.search).get('pc') || '').toUpperCase().replace(/\s+/g, '');
     if (!pc) return;
     document.getElementById('pc').value = pc;
@@ -38,14 +37,14 @@ async function showDetails() {
         );
     } catch (error) {
         console.error(error);
-        result.innerHTML = '<p class="text-danger">The data could not be loaded. Try again later.</p>';
+        document.getElementById('summary').innerHTML = '<p class="text-danger">The data could not be loaded. Try again later.</p>';
         return;
     }
 
     const match = postcodes[pc];
     const area = match && dep.areas[match[0]];
     if (!match || !area) {
-        result.innerHTML = `<p class="text-danger">No results found for ${esc(pc)}. Check the postcode and try again.</p>`;
+        document.getElementById('summary').innerHTML = `<p class="text-danger">No results found for ${esc(pc)}. Check the postcode and try again.</p>`;
         return;
     }
 
@@ -67,8 +66,7 @@ async function showDetails() {
         })
         .join('');
 
-    result.innerHTML = `
-        <h2>${esc(cleanName(esc(pc)))}</h2>
+    const summary = `<h2>${esc(cleanName(esc(pc)))}</h2>
         <table class="table lookup-table">
             <tbody>
                 <tr><th scope="row">Neighbourhood</th><td>${esc(cleanName(area.label))} (${esc(soa)})</td></tr>
@@ -76,8 +74,17 @@ async function showDetails() {
                 <tr><th scope="row">Urban or rural</th><td>${esc(sentenceCase(settlement))}</td></tr>
             </tbody>
         </table>
-        <h3 class="mt-4">Rank in each type of deprivation</h3>
-        ${rows}`;
+        `
+    
+    const scales = `
+    <h3 class="mt-4">Rank in each type of deprivation</h3>
+    ${rows}
+    `;
+
+    document.getElementById('summary').innerHTML = summary;
+    document.getElementById('scales').innerHTML = scales;
 }
+
+
 
 showDetails();

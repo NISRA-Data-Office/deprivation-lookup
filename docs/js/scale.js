@@ -7,7 +7,6 @@ function rankScale(rank, maxRank, palette, labels) {
         const colour = palette[index];
         const start = index * colourWidth;
         const end = start + colourWidth;
-
         colourStops.push(`${colour} ${start}% ${end}%`);
     }
 

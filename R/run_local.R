@@ -1,1 +1,1 @@
-httpuv::runStaticServer("./site")
+httpuv::runStaticServer("./docs")

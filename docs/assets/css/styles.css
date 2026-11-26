@@ -547,3 +547,24 @@ thead th {
 .rank-scale-labels span:last-child {
     text-align: right;
 }
+
+.site-nav {
+  display: flex;
+  justify-content: center;
+  gap:2rem;
+}
+
+.site-nav-link {
+  text-decoration: none;
+  font-weight: 600;
+  color: #003865;
+}
+
+.site-nav-link.active {
+  border-bottom: 3px solid
+}
+
+.search-label {
+  display: block;
+  text-align: right;
+}

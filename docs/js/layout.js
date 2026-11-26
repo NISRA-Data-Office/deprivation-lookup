@@ -5,9 +5,11 @@ const isHome = here === 'index.html';
 const navLinks = pages.map(([href, name]) => `<a class="site-nav-link${href === here ? ' active' : ''}" href="${href}"${href === here ? ' aria-current="page"' : ''}>${name}</a>`).join('');
 
 const navigation = isHome ? '' : `
-    <nav class="site-nav justify-content-center mt-3" aria-label="Main navigation">
-        ${navLinks}
-    </nav>`;
+    <div class="container py-3">
+        <nav class="site-nav text-center" aria-label="Main navigation">
+            ${navLinks}
+        </nav>
+    </div>`;
 
 document.getElementById('site-header').innerHTML = `
     <div class="container-fluid navy-bg">
@@ -32,10 +34,11 @@ document.getElementById('site-header').innerHTML = `
         <div class="container py-3 text-center">
             <p class="mb-1">The 2017 statistics on deprivation in Northern Ireland, including the Multiple Deprivation Measure (NIMDM).</p>
             <p class="mb-0">Deprivation refers to people's unmet needs, a lack of access to opportunities and resources which we might expect in our society.</p>
-            ${navigation}
         </div>
-    </div>`;
-
+    </div>
+    ${navigation}
+    `;
+    
 const list = (items) => items.map(([href, name]) => `<li><a href="${href}">${name}</a></li>`).join('');
 
 const social = [
