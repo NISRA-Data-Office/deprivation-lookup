@@ -585,6 +585,13 @@ thead th {
   text-align: right;
 }
 
+.search-btn {
+  color: #fff;
+  width: 10%;
+  border-radius: 15%;
+  border: black;
+  background-color: #732777;
+}
 .navigation-buttons {
   display: block;
   text-align: center;

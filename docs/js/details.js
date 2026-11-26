@@ -50,28 +50,27 @@ async function showDetails() {
 
     const [soa, lgd, settlement] = match; // assigns based on order of data from postcodes.json
     const maxRank = Object.keys(dep.areas).length;
-    const last = dep.indicators.length - 1;
 
-    const rows = dep.indicators
-        .map((indicator, i) => {
-            const rank = area.ranks[i];
-            const labels = i === 0 ? 'above' : i === last ? 'below' : undefined; // shows labels for scale on 1st and last scale only
-            return `<div class="row align-items-center scale-row${i === 0 ? ' border-bottom border-dark mb-5 pb-2' : ''}">
-                <div class="col-12 col-xl-4 text-xl-end">
-                    <p class="mb-0 fs-5">${esc(cleanIndicator(indicator.name))}</p>
-                    <p class="mb-0">Rank ${esc(rank)} of ${maxRank}</p>
-                </div>
-                <div class="col-12 col-xl-8">${rankScale(rank, maxRank, palette, labels)}</div>
-            </div>`;
-        })
-        .join('');
+const rows = dep.indicators
+    .map((indicator, i) => {
+        const rank = area.ranks[i];
+
+        return `<div class="row align-items-center scale-row${i === 0 ? ' border-bottom border-dark mb-5 pb-2' : ''}">
+            <div class="col-12 col-xl-4 text-xl-end">
+                <strong><p class="mb-1 fs-5">${esc(cleanIndicator(indicator.name))}</p></strong>
+                <p class="mb-0 font-weight-">Rank ${esc(rank)} of ${maxRank}</p>
+            </div>
+            <div class="col-12 col-xl-8">${rankScale(rank, maxRank, palette)}</div>
+        </div>`;
+    })
+    .join('');
 
     const summary = `<h2>${esc(cleanName(esc(pc)))}</h2>
         <table class="table lookup-table">
             <tbody>
-                <tr><th scope="row">Neighbourhood</th><td>${esc(cleanName(area.label))} (${esc(soa)})</td></tr>
-                <tr><th scope="row">Council area</th><td>${esc(councils[lgd] || lgd)} (${esc(lgd)})</td></tr>
-                <tr><th scope="row">Urban or rural</th><td>${esc(sentenceCase(settlement))}</td></tr>
+                <tr><th scope="row">Super Output Area (SOA)</th><td>${esc(cleanName(area.label))} (${esc(soa)})</td></tr>
+                <tr><th scope="row">Local Government District</th><td>${esc(councils[lgd] || lgd)} (${esc(lgd)})</td></tr>
+                <tr><th scope="row">Urban/Rural Classification</th><td>${esc(sentenceCase(settlement))}</td></tr>
             </tbody>
         </table>
         `

@@ -20,11 +20,10 @@
 }
 
 .lookup-table th {
-    width: 12rem;
+    width: 15rem;
 }
 
 .scale-row {
-    display: block;
     width: 100%;
     height: auto;
 }

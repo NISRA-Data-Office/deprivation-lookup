@@ -31,7 +31,7 @@ document.getElementById('site-header').innerHTML = `
 
     <div class="container-fluid grey-bg">
         <div class="container py-3 text-center">
-            <p class="mb-1">The 2017 statistics on deprivation in Northern Ireland, including the Multiple Deprivation Measure (NIMDM).</p>
+            <p class="mb-1">The Northern Ireland Multiple Deprivation Measure 2017 (NIMDM 2017) ranks areas across Northern Ireland according to their relative levels of deprivation.</p>
             <p class="mb-0">Deprivation refers to people's unmet needs, a lack of access to opportunities and resources which we might expect in our society.</p>
         </div>
     </div>

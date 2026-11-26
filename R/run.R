@@ -12,6 +12,8 @@ workbook_path <- lakehouse_file("boundaries", "raw", "NIMDM17_SOAresults (2).xls
 soa_path <- lakehouse_file("boundaries", "raw", "SOA2011_Esri_Shapefile_0/SOA2011.shp")
 cpd <- read_sf(lakehouse_file("cpd", "raw", "CPDJAN2026/POSTCODES_JAN2026.csv"))
 
+id_domains <- read_xls(workbook_path, sheet = "IDAC and IDAP")
+names(id_domains)[c(5,7)] <- c("Income Affecting Children", "Income Affecting Older People")
 # Urban/rural lookup: skip the 3 blank rows, row 4 becomes the headers
 urban_rural_lookup <- read_excel(
   lakehouse_file("boundaries", "raw", "Settlement15-lookup.xls"),
@@ -46,13 +48,31 @@ indicators <- map(setdiff(excel_sheets(workbook_path), "Metadata"), function(she
   if (!length(rank_cols) || !"SOA2001" %in% names(data)) return(NULL)
   codes <- toupper(trimws(as.character(data$SOA2001)))
   map(rank_cols, \(col) list(
-    name = str_squish(col), domain = sheet,
+    name = if (str_detect(col, regex("health", ignore_case = TRUE))) {
+      str_squish(str_remove_all(col, regex("\\bDeprivation\\b", ignore_case = TRUE)))
+    } else {
+      str_squish(col)
+    }, domain = sheet,
     rank = suppressWarnings(as.numeric(data[[col]]))[match(soa$code, codes)]))
 }) |> list_flatten() |> compact() |>
   keep(\(x) (str_detect(x$name, regex("\\bdomain\\b", ignore_case = TRUE)) &
                !str_detect(x$name, regex("sub-?domain", ignore_case = TRUE))) |
          str_detect(x$name, regex("multiple deprivation", ignore_case = TRUE)))
 indicators <- indicators[!duplicated(map_chr(indicators, "name"))]
+
+extra_indicators <- c(
+  list(list(
+    name = "Income Affecting Children",
+    domain = "Income",
+    rank = id_domains[["Income Affecting Children"]][match(soa$code, toupper(trimws(id_domains$SOA2001)))]
+  )),
+  list(list(
+    name = "Income Affecting Older People",
+    domain = "Income",
+    rank = id_domains[["Income Affecting Older People"]][match(soa$code, toupper(trimws(id_domains$SOA2001)))]
+  ))
+)
+indicators <- c(indicators, extra_indicators)
 
 # deprivation.json: indicator list + label and ranks per SOA
 write_json(

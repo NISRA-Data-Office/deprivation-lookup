@@ -1,4 +1,4 @@
-function rankScale(rank, maxRank, palette, labels) {
+function rankScale(rank, maxRank, palette) {
     const colourStops = [];
     const colourLength = palette.length;
     const colourWidth = 100 / colourLength; // 10 deciles, 10 width each
@@ -21,15 +21,11 @@ function rankScale(rank, maxRank, palette, labels) {
             <span>(Least deprived) ${maxRank} →</span>
         </div>`;
 
-    const labelsAbove = labels === 'above' ? scaleLabels : '';
-    const labelsBelow = labels === 'below' ? scaleLabels : '';
-
-    return `
-        <div class="rank-scale-wrapper" role="img" aria-label="Rank ${rank} of ${maxRank}">
-            ${labelsAbove}
-            <div class="rank-scale" style="background: ${background};">
-                <span class="rank-scale-marker" style="left: ${rankPosition}%;" aria-hidden="true"></span>
-            </div>
-            ${labelsBelow}
-        </div>`;
+return `
+    <div class="rank-scale-wrapper" role="img" aria-label="Rank ${rank} of ${maxRank}">
+        <div class="rank-scale" style="background: ${background};">
+            <span class="rank-scale-marker" style="left: ${rankPosition}%;" aria-hidden="true"></span>
+        </div>
+        ${scaleLabels}
+    </div>`;
 }
