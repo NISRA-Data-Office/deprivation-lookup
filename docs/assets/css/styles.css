@@ -270,17 +270,15 @@ table tr:not(:has(th)):hover {
 }
 
 .nav-btn {
-  background-color: #00205b;
-  border-bottom: 16px solid #00205b;
-  padding:0rem 0.5rem 0.5rem;
-  color: #fff;
+    padding: 0 0.5rem 0.2rem;
+    color: #000;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
 }
 
 .nav-btn:hover {
-   border-bottom: 16px solid #68a41e;
-   padding-bottom: 0.5rem;
-  color: #fff;
-  cursor: pointer;
+    border-bottom-color: #68a41e;
+    color: #000;
 }
 
 .chart-canvas {
@@ -567,4 +565,9 @@ thead th {
 .search-label {
   display: block;
   text-align: right;
+}
+
+.navigation-buttons {
+  display: block;
+  text-align: center;
 }

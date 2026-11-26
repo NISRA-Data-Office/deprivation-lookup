@@ -2,11 +2,10 @@ const pages = [['index.html', 'Home'], ['about.html', 'About'], ['contact.html',
 const here = location.pathname.split('/').pop() || 'index.html';
 const isHome = here === 'index.html';
 
-const navLinks = pages.map(([href, name]) => `<a class="site-nav-link${href === here ? ' active' : ''}" href="${href}"${href === here ? ' aria-current="page"' : ''}>${name}</a>`).join('');
-
-const navigation = isHome ? '' : `
+const navLinks = pages.map(([href, name]) => `<a class="site-nav-link nav-btn${href === here ? ' active' : ''}" href="${href}"${href === here ? ' aria-current="page"' : ''}>${name}</a>`).join('');
+const navigation = `
     <div class="container py-3">
-        <nav class="site-nav text-center" aria-label="Main navigation">
+        <nav class="site-nav" aria-label="Main navigation">
             ${navLinks}
         </nav>
     </div>`;
