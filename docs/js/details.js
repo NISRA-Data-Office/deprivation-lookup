@@ -56,7 +56,7 @@ async function showDetails() {
         .map((indicator, i) => {
             const rank = area.ranks[i];
             const labels = i === 0 ? 'above' : i === last ? 'below' : undefined; // shows labels for scale on 1st and last scale only
-            return `<div class="row align-items-center scale-row${i === 0 ? ' border-bottom border-dark mb-3 pb-2' : ''}">
+            return `<div class="row align-items-center scale-row${i === 0 ? ' border-bottom border-dark mb-5 pb-2' : ''}">
                 <div class="col-12 col-xl-4 text-xl-end">
                     <p class="mb-0 fs-5">${esc(cleanIndicator(indicator.name))}</p>
                     <p class="mb-0">Rank ${esc(rank)} of ${maxRank}</p>
