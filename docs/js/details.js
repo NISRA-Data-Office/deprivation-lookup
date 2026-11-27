@@ -55,17 +55,25 @@ const rows = dep.indicators
     .map((indicator, i) => {
         const rank = area.ranks[i];
 
-        return `<div class="row align-items-center scale-row${i === 0 ? ' border-bottom border-dark mb-5 pb-2' : ''}">
-            <div class="col-12 col-xl-4 text-xl-end">
-                <strong><p class="mb-1 fs-5">${esc(cleanIndicator(indicator.name))}</p></strong>
-                <p class="mb-0 font-weight-">Rank ${esc(rank)} of ${maxRank}</p>
-            </div>
-            <div class="col-12 col-xl-8">${rankScale(rank, maxRank, palette)}</div>
-        </div>`;
-    })
-    .join('');
+    //     return `<div class="row scale-row${i === 0 ? ' border-bottom border-dark mb-5 pb-2' : ''}">
+    //         <div class="col-12 col-xl-4 text-xl-end">
+    //             <p class="mb-1 fs-5 fw-bold">${esc(cleanIndicator(indicator.name))}</p>
+    //             <p class="mb-0">Rank ${esc(rank)} of ${maxRank}</p>
+    //         </div>
+    //         <div class="col-12 col-xl-8">${rankScale(rank, maxRank, palette)}</div>
+    //     </div>`;
+    // })
 
-    const summary = `<h2>${esc(cleanName(esc(pc)))}</h2>
+return `<div class="row scale-row">
+        <div class="col-12 col-xl-3 text-xl-end">
+        <p class="mb-0">${esc(cleanIndicator(indicator.name))}</p>
+        <p class="mb-0 small text-secondary">Rank ${esc(rank)} of ${maxRank}</p>
+        </div>
+        <div class="col-12 col-xl-9">${rankScale(rank, maxRank, palette)}</div>
+        </div>`;
+    });
+
+    const summary = `<h2>${esc(pc.slice(0, -3) + ' ' + pc.slice(-3))}</h2>
         <table class="table lookup-table">
             <tbody>
                 <tr><th scope="row">Super Output Area (SOA)</th><td>${esc(cleanName(area.label))} (${esc(soa)})</td></tr>
@@ -75,10 +83,24 @@ const rows = dep.indicators
         </table>
         `
     
+    // const scales = `
+    // <h3 class="mt-4">Rank in each type of deprivation</h3>
+    // <div class="bg-light rounded p-3 mb-4">${rows[0]}</div>
+    // <h3>Types of deprivation that make up the overall rank</h3>
+    // ${rows.slice(1).join('')};
+    // `;
+    const overallRank = area.ranks[0];
+    const decile = Math.ceil(overallRank / maxRank * 10);
+    const band = decile <= 5
+        ? `${decile * 10}% most deprived`
+        : `${(11-decile) * 10}% least deprived`;
     const scales = `
-    <h3 class="mt-4">Rank in each type of deprivation</h3>
-    ${rows}
-    `;
+    <h3 class="mt-4 mb-1">Multiple Deprivation Measure</h3>
+    <p class="fs-5">Among the <strong>${band}</strong> areas in Northern Ireland</p>
+    <div class="overall-scale">${rankScale(overallRank,maxRank,palette,'below')}</div>
+    <hr class="border-dark opacity-100 my-4">
+    <h4 class="mb-3">What makes up the overall rank</h4>
+    ${rows.slice(1).join('')}`;
 
     document.getElementById('summary').innerHTML = summary;
     document.getElementById('scales').innerHTML = scales;
